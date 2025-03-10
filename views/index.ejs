@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Playlist Search!</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Spotify Playlist Search</h1>
+
+    <!-- Login Button -->
+    <% if (!loggedIn) { %> 
+      <a href="/login" class="btn">Login with Spotify</a>
+    <% } %>
+
+    <!-- Search Form -->
+    <% if (loggedIn) { %>
+      <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for playlists..." required>
+        <button type="submit" class="btn">Search</button>
+      </form>
+    <% } %>
+
+    <!-- Display Playlists -->
+    <% if (playlists && playlists.length > 0) { %>
+      <h2>Search Results</h2>
+      <ul>
+        <% playlists.forEach(playlist => { %>
+          <li>
+            <a href="<%= playlist.external_urls.spotify %>" target="_blank">
+              <%= playlist.name %>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>
